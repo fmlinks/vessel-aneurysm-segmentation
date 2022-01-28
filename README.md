@@ -18,33 +18,19 @@ vessel-aneurysm-segmentation/
     │   │   ├── ANSYS_UNIGE_28_image.nii.gz
     │   │   └── ...
     ├── inference
-
     │   └── inference.ipynb (**use this to do inference**)
-
     │   ├── inference.py
-
     ├── results
-
     │   └── aneurysm (aneurysm prediction)
-
     │   │   └── ANSYS_UNIGE_09_image-[360, 633].nii.gz
-
     │   │   ├── ANSYS_UNIGE_28_image-[1540].nii.gz
-
     │   │   └── ...
-
     │   ├── vessel (vessel prediction)
-
     │   │   └── ANSYS_UNIGE_09_image_vessel_59969.nii.gz
-
     │   │   ├── ANSYS_UNIGE_28_image_vessel_68437.nii.gz
-
     │   │   └── ...
-
     ├── weights
-
     │   └── fmnet5.hdf5
-
     └── requirements.txt
 
 
