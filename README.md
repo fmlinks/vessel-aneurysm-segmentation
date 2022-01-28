@@ -8,53 +8,44 @@ Folder structure:
 
 vessel-aneurysm-segmentation/
 
-├── data
+    ├── data
+    │   └── step0 (**put the data you want to do inference here**)
+    │   │   └── ANSYS_UNIGE_09_image.nii.gz
+    │   │   ├── ANSYS_UNIGE_28_image.nii.gz
+    │   │   └── ...
+    │   ├── step1 (pre-processed data, generate automatically)
+    │   │   └── ANSYS_UNIGE_09_image.nii.gz
+    │   │   ├── ANSYS_UNIGE_28_image.nii.gz
+    │   │   └── ...
+    ├── inference
 
-│   └── step0 (**put the data you want to do inference here**)
+    │   └── inference.ipynb (**use this to do inference**)
 
-│   │   └── ANSYS_UNIGE_09_image.nii.gz
+    │   ├── inference.py
 
-│   │   ├── ANSYS_UNIGE_28_image.nii.gz
+    ├── results
 
-│   │   └── ...
+    │   └── aneurysm (aneurysm prediction)
 
-│   ├── step1 (pre-processed data, generate automatically)
+    │   │   └── ANSYS_UNIGE_09_image-[360, 633].nii.gz
 
-│   │   └── ANSYS_UNIGE_09_image.nii.gz
+    │   │   ├── ANSYS_UNIGE_28_image-[1540].nii.gz
 
-│   │   ├── ANSYS_UNIGE_28_image.nii.gz
+    │   │   └── ...
 
-│   │   └── ...
+    │   ├── vessel (vessel prediction)
 
-├── inference
+    │   │   └── ANSYS_UNIGE_09_image_vessel_59969.nii.gz
 
-│   └── inference.ipynb (**use this to do inference**)
+    │   │   ├── ANSYS_UNIGE_28_image_vessel_68437.nii.gz
 
-│   ├── inference.py
+    │   │   └── ...
 
-├── results
+    ├── weights
 
-│   └── aneurysm (aneurysm prediction)
+    │   └── fmnet5.hdf5
 
-│   │   └── ANSYS_UNIGE_09_image-[360, 633].nii.gz
-
-│   │   ├── ANSYS_UNIGE_28_image-[1540].nii.gz
-
-│   │   └── ...
-
-│   ├── vessel (vessel prediction)
-
-│   │   └── ANSYS_UNIGE_09_image_vessel_59969.nii.gz
-
-│   │   ├── ANSYS_UNIGE_28_image_vessel_68437.nii.gz
-
-│   │   └── ...
-
-├── weights
-
-│   └── fmnet5.hdf5
-
-└── requirements.txt
+    └── requirements.txt
 
 
 
