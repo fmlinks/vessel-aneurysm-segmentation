@@ -10,8 +10,7 @@ Weights can be download here: https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9a
 
 Folder structure:
 
-vessel-aneurysm-segmentation/
-
+    vessel-aneurysm-segmentation/
     ├── data
     │   └── step0 (**put the data you want to do inference here**)
     │   │   └── ANSYS_UNIGE_09_image.nii.gz
