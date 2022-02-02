@@ -3,9 +3,9 @@ Cerebrovascular and Aneurysm Segmentation in 3DRA images via a Deep Multi-Task N
 
 Weights can be download here: https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9aFDAVvmYezxWJROi/view?usp=sharing
 
-fmnet5.hdf5 for inference_AneuristNet.py
+(fmnet5.hdf5 for inference_AneuristNet.py)
 
-fmnet84.hdf5 for inference_Transformer.py
+(fmnet84.hdf5 for inference_Transformer.py)
 
 
 Folder structure:
@@ -37,5 +37,11 @@ vessel-aneurysm-segmentation/
     │   └── fmnet5.hdf5
     └── requirements.txt
 
+How to use the code:
+
+    cd vessel-aneurysm-segmentation
+    pip install -r requirements.txt
+    cd inference
+    python inference_AneuristNet.py
 
 
