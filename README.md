@@ -1,7 +1,9 @@
 # vessel-aneurysm-segmentation
 Cerebrovascular and Aneurysm Segmentation in 3DRA images via a Deep Multi-Task Network
 
-Weight（fmnet5.hdf5）can be download here: https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9aFDAVvmYezxWJROi/view?usp=sharing
+Weights can be download here: https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9aFDAVvmYezxWJROi/view?usp=sharing
+fmnet5.hdf5 for inference_AneuristNet.py
+fmnet84.hdf5 for inference_Transformer.py
 
 
 Folder structure:
