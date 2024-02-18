@@ -45,12 +45,12 @@ How to use the code:
 
 
 
-@article{lin2023high,
-  title={High-throughput 3DRA segmentation of brain vasculature and aneurysms using deep learning},
-  author={Lin, Fengming and Xia, Yan and Song, Shuang and Ravikumar, Nishant and Frangi, Alejandro F},
-  journal={Computer Methods and Programs in Biomedicine},
-  volume={230},
-  pages={107355},
-  year={2023},
-  publisher={Elsevier}
-}
+    @article{lin2023high,
+      title={High-throughput 3DRA segmentation of brain vasculature and aneurysms using deep learning},
+      author={Lin, Fengming and Xia, Yan and Song, Shuang and Ravikumar, Nishant and Frangi, Alejandro F},
+      journal={Computer Methods and Programs in Biomedicine},
+      volume={230},
+      pages={107355},
+      year={2023},
+      publisher={Elsevier}
+    }
