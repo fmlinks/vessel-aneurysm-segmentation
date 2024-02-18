@@ -44,7 +44,7 @@ How to use the code:
     python inference_AneuristNet.py
 
 
-Please cite: Orz ヾ(o′▽`o)ノ°°
+Citation  ヾ(o′▽`o)ノ°°
 
     @article{lin2023high,
       title={High-throughput 3DRA segmentation of brain vasculature and aneurysms using deep learning},
