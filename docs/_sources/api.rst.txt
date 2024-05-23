@@ -1,6 +1,0 @@
-API
-============
-
-Welcome to the VASeg documentation!
-
-API
