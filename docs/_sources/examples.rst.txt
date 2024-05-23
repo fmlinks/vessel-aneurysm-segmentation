@@ -1,0 +1,6 @@
+Examples
+============
+
+Welcome to the VASeg documentation!
+
+Examples
