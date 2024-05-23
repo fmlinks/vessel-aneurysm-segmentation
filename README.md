@@ -5,7 +5,7 @@
 ## 🦒 Colab  <a href="https://colab.research.google.com/drive/1WS-u1ubEQaW7cGQ1R9IgW5Haytfduo1a?usp=sharing" target="_parent\"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 
-## 📖 Document  <a href="https://fmlinks.github.io/vessel-aneurysm-segmentation/docs/index.html" target="_parent\"><img src="https://img.shields.io/badge/CISTIB-Document-blue" alt="Open In Colab"/></a>
+## 📖 Document  <a href="https://fmlinks.github.io/vessel-aneurysm-segmentation/docs/index.html" target="_parent\"><img src="https://img.shields.io/badge/CISTIB-Documentation-blue" alt="Open In Colab"/></a>
 
 
 
