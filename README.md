@@ -2,10 +2,8 @@
 <br />
 
 
-## 🦒 Colab  <a href="https://colab.research.google.com/drive/1WS-u1ubEQaW7cGQ1R9IgW5Haytfduo1a?usp=sharing" target="_parent\"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+## 🦒 Colab  <a href="https://colab.research.google.com/drive/1WS-u1ubEQaW7cGQ1R9IgW5Haytfduo1a?usp=sharing" target="_parent\"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  📖 Documentation  <a href="https://fmlinks.github.io/vessel-aneurysm-segmentation/docs/index.html" target="_parent\"><img src="https://img.shields.io/badge/CISTIB-Documentation-blue" alt="Open In Colab"/></a> 🕹️ Dataset  <a href="https://drive.google.com/drive/folders/1tO_c9qi9-ckH_9krY_Fyihz4g5B5va8S?usp=drive_link" target="_parent\"><img src="https://img.shields.io/badge/CISTIB-Dataset-blue" alt="Open In Colab"/></a>
 
-
-## 📖 Documentation  <a href="https://fmlinks.github.io/vessel-aneurysm-segmentation/docs/index.html" target="_parent\"><img src="https://img.shields.io/badge/CISTIB-Documentation-blue" alt="Open In Colab"/></a>
 
 
 
