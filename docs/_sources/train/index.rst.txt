@@ -1,0 +1,15 @@
+.. _train:
+
+Train
+===================
+
+.. toctree::
+   :maxdepth: 2
+
+   building_blocks
+   loss
+   trainer
+   model
+
+
+

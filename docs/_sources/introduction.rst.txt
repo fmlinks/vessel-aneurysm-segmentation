@@ -1,0 +1,22 @@
+Introduction
+============
+
+Welcome to the VASeg documentation!
+
+**Introduction**
+
+*Background and Objectives*:
+Automatic segmentation of the cerebral vasculature and aneurysms facilitates incidental detection of aneurysms. The assessment of aneurysm rupture risk assists with pre-operative treatment planning and enables in-silico investigation of cerebral hemodynamics within and in the vicinity of aneurysms. However, ensuring precise and robust segmentation of cerebral vessels and aneurysms in neuroimaging modalities such as three-dimensional rotational angiography (3DRA) is challenging. The vasculature constitutes a small proportion of the image volume, resulting in a large class imbalance (relative to surrounding brain tissue). Additionally, aneurysms and vessels have similar image/appearance characteristics, making it challenging to distinguish the aneurysm sac from the vessel lumen.
+
+*Methods*:
+We propose a novel multi-class convolutional neural network to tackle these challenges and facilitate the automatic segmentation of cerebral vessels and aneurysms in 3DRA images. The proposed model is trained and evaluated on an internal multi-center dataset and an external publicly available challenge dataset.
+
+*Results*:
+On the internal clinical dataset, our method consistently outperformed several state-of-the-art approaches for vessel and aneurysm segmentation, achieving an average Dice score of 0.81 (0.15 higher than nnUNet) and an average surface-to-surface error of 0.20 mm (less than the in-plane resolution (0.35 mm/pixel)) for aneurysm segmentation; and an average Dice score of 0.91 and average surface-to-surface error of 0.25 mm for vessel segmentation. In 223 cases of a clinical dataset, our method accurately segmented 190 aneurysm cases.
+
+*Conclusions*:
+The proposed approach can help address class imbalance problems and inter-class interference problems in multi-class segmentation. Besides, this method performs consistently on clinical datasets from four different sources and the generated results are qualified for hemodynamic simulation.
+
+
+
+

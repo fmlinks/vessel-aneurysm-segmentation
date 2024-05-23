@@ -1,0 +1,4 @@
+Step 1 Documentation
+====================
+
+The first step is to document the current state of the codebase. This will

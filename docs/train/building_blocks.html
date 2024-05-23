@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blocks &mdash; vaseg 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/documentation_options.js?v=2ed17a75"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loss" href="loss.html" />
+    <link rel="prev" title="Train" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            vaseg
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Train</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loss.html">Loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../inference/index.html">Inference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">vaseg</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Train</a></li>
+      <li class="breadcrumb-item active">Blocks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/train/building_blocks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="blocks">
+<h1>Blocks<a class="headerlink" href="#blocks" title="Link to this heading">¶</a></h1>
+<p><strong>MLP</strong></p>
+<p>Multi-Layer Perceptron (MLP) is a class of feedforward artificial neural network (ANN). The term MLP is used ambiguously, sometimes loosely to any feedforward ANN, sometimes strictly to refer to networks composed of multiple layers of perceptrons (with threshold activation); see § Terminology. Multilayer perceptrons are sometimes colloquially referred to as &quot;vanilla&quot; neural networks, especially when they have a single hidden layer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mlp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="p">):</span>
+ <span class="k">for</span> <span class="n">units</span> <span class="ow">in</span> <span class="n">hidden_units</span><span class="p">:</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">gelu</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_rate</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+ <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p><strong>Dual Attention Module</strong></p>
+<p>In latent layer, if the channel of the feature map is 256, then ues the following code to implement the dual attention module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ATT256</span><span class="p">(</span><span class="n">acti5_2</span><span class="p">):</span>
+    <span class="c1"># Attention</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti5_2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti5_2</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti5_2</span><span class="p">)</span>
+
+    <span class="n">vec_b</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">32</span><span class="p">))(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">vec_cT</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">32</span><span class="p">))(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">vec_cT</span> <span class="o">=</span> <span class="n">Permute</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">vec_cT</span><span class="p">)</span>
+    <span class="n">bcT</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">vec_cT</span><span class="p">,</span> <span class="n">vec_b</span><span class="p">])</span>
+    <span class="n">softmax_bcT</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">bcT</span><span class="p">)</span>
+    <span class="n">vec_d</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">))(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">bcTd</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">vec_d</span><span class="p">,</span> <span class="n">softmax_bcT</span><span class="p">])</span>
+
+    <span class="n">bcTd</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">))(</span><span class="n">bcTd</span><span class="p">)</span>
+    <span class="n">out1</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">bcTd</span><span class="p">,</span> <span class="n">acti5_2</span><span class="p">])</span>
+    <span class="n">pam</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">out1</span><span class="p">)</span>
+    <span class="n">pam</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">pam</span><span class="p">)</span>
+
+    <span class="n">vec_a</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">))(</span><span class="n">acti5_2</span><span class="p">)</span>
+    <span class="n">vec_aT</span> <span class="o">=</span> <span class="n">Permute</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">vec_a</span><span class="p">)</span>
+    <span class="n">aTa</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">vec_a</span><span class="p">,</span> <span class="n">vec_aT</span><span class="p">])</span>
+    <span class="n">softmax_aTa</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">aTa</span><span class="p">)</span>
+    <span class="n">aaTa</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">softmax_aTa</span><span class="p">,</span> <span class="n">vec_a</span><span class="p">])</span>
+    <span class="n">aaTa</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">))(</span><span class="n">aaTa</span><span class="p">)</span>
+    <span class="n">out2</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">aaTa</span><span class="p">,</span> <span class="n">acti5_2</span><span class="p">])</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">out2</span><span class="p">)</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">cam</span><span class="p">)</span>
+
+    <span class="n">attention</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">pam</span><span class="p">,</span> <span class="n">cam</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">attention</span>
+</pre></div>
+</div>
+<p><strong>Auto Dual Attention Module</strong></p>
+<p>In latent layer, if the channel of the feature map is unknown, then ues the following code to implement the dual attention module.
+acti5_2: the input latent feature.
+org_channel: the channel of the feature map. For example, if the input channel of the feature map is 256, then org_channel=256
+channels: the channel of the feature map after the dual attention module. For example, if the output channel of the feature map is 256, then channels=256
+fsize: the size of the feature map. For example, if the size of the feature map is 8*8*8, then fsize=8</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ATT_auto</span><span class="p">(</span><span class="n">acti5_2</span><span class="p">,</span> <span class="n">org_channel</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">fsize</span><span class="p">):</span>
+    <span class="c1"># Attention c_channel=32, channels=128, fsize=8   [8,8,8,128]</span>
+    <span class="n">fsize</span> <span class="o">=</span> <span class="n">acti5_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;####################&#39;</span><span class="p">,</span> <span class="n">acti5_2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">org_channel</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti5_2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">org_channel</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti5_2</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti5_2</span><span class="p">)</span>
+
+    <span class="n">vec_b</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="p">,</span> <span class="n">org_channel</span><span class="p">))(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">vec_cT</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="p">,</span> <span class="n">org_channel</span><span class="p">))(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">vec_cT</span> <span class="o">=</span> <span class="n">Permute</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">vec_cT</span><span class="p">)</span>
+    <span class="n">bcT</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">vec_cT</span><span class="p">,</span> <span class="n">vec_b</span><span class="p">])</span>
+    <span class="n">softmax_bcT</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">bcT</span><span class="p">)</span>
+    <span class="n">vec_d</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="p">,</span> <span class="n">channels</span><span class="p">))(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">bcTd</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">vec_d</span><span class="p">,</span> <span class="n">softmax_bcT</span><span class="p">])</span>
+
+    <span class="n">bcTd</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">fsize</span><span class="p">,</span> <span class="n">fsize</span><span class="p">,</span> <span class="n">fsize</span><span class="p">,</span> <span class="n">channels</span><span class="p">))(</span><span class="n">bcTd</span><span class="p">)</span>
+    <span class="n">out1</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">bcTd</span><span class="p">,</span> <span class="n">acti5_2</span><span class="p">])</span>
+    <span class="n">pam</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">out1</span><span class="p">)</span>
+    <span class="n">pam</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">pam</span><span class="p">)</span>
+
+    <span class="n">vec_a</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="o">*</span><span class="n">fsize</span><span class="p">,</span> <span class="n">channels</span><span class="p">))(</span><span class="n">acti5_2</span><span class="p">)</span>
+    <span class="n">vec_aT</span> <span class="o">=</span> <span class="n">Permute</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">vec_a</span><span class="p">)</span>
+    <span class="n">aTa</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">vec_a</span><span class="p">,</span> <span class="n">vec_aT</span><span class="p">])</span>
+    <span class="n">softmax_aTa</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">aTa</span><span class="p">)</span>
+    <span class="n">aaTa</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))([</span><span class="n">softmax_aTa</span><span class="p">,</span> <span class="n">vec_a</span><span class="p">])</span>
+    <span class="n">aaTa</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">fsize</span><span class="p">,</span> <span class="n">fsize</span><span class="p">,</span> <span class="n">fsize</span><span class="p">,</span> <span class="n">channels</span><span class="p">))(</span><span class="n">aaTa</span><span class="p">)</span>
+    <span class="n">out2</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">aaTa</span><span class="p">,</span> <span class="n">acti5_2</span><span class="p">])</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">out2</span><span class="p">)</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">cam</span><span class="p">)</span>
+
+    <span class="n">attention</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">pam</span><span class="p">,</span> <span class="n">cam</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">attention</span>
+</pre></div>
+</div>
+<p><strong>Downsample Block</strong></p>
+<p>Instead of using the MaxPooling layer, the downsample block uses the Conv3D layer with strides=2 to downsample the feature map.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">downsample_block</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+
+    <span class="c1"># MaxPooling</span>
+    <span class="n">maxpool2</span> <span class="o">=</span> <span class="n">MaxPooling3D</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">conv2_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">maxpool2</span><span class="p">)</span>
+    <span class="n">norm2_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_1</span><span class="p">)</span>
+    <span class="n">acti2_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_1</span><span class="p">)</span>
+
+    <span class="c1"># strides=2</span>
+    <span class="n">conv3_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm3_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_1</span><span class="p">)</span>
+    <span class="n">acti3_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_1</span><span class="p">)</span>
+
+    <span class="n">conv3_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti3_1</span><span class="p">)</span>
+    <span class="n">norm3_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_2</span><span class="p">)</span>
+    <span class="n">acti3_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_2</span><span class="p">)</span>
+
+    <span class="n">concat</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()([</span><span class="n">acti2_1</span><span class="p">,</span> <span class="n">acti3_2</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">concat</span>
+</pre></div>
+</div>
+<p><strong>MultiView Block</strong></p>
+<p>Except to the traditional 3D convolution, the MultiView block uses the 3D convolution with different kernel size to extract the features.
+Cause the vessel feature is long and thin along some plane, the MultiView block can extract the long features along different plane without introducing too much parameters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MultiView</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+    <span class="n">conv1_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm1_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_1</span><span class="p">)</span>
+    <span class="n">acti1_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_1</span><span class="p">)</span>
+
+    <span class="n">conv2_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm2_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_1</span><span class="p">)</span>
+    <span class="n">acti2_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_1</span><span class="p">)</span>
+
+    <span class="n">conv3_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm3_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_1</span><span class="p">)</span>
+    <span class="n">acti3_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_1</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="n">conv1_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_1</span><span class="p">)</span>
+    <span class="n">norm1_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_2</span><span class="p">)</span>
+    <span class="n">acti1_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_2</span><span class="p">)</span>
+
+    <span class="n">conv2_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti2_1</span><span class="p">)</span>
+    <span class="n">norm2_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_2</span><span class="p">)</span>
+    <span class="n">acti2_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_2</span><span class="p">)</span>
+
+    <span class="n">conv3_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti3_1</span><span class="p">)</span>
+    <span class="n">norm3_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_2</span><span class="p">)</span>
+    <span class="n">acti3_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_2</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">acti1_2</span><span class="p">,</span> <span class="n">acti2_2</span><span class="p">,</span> <span class="n">acti3_2</span><span class="p">])</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                  <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">add</span><span class="p">)</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv</span><span class="p">)</span>
+    <span class="n">acti</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">acti</span>
+</pre></div>
+</div>
+<p><strong>Transformer Block</strong></p>
+<p>The Transformer Block includes three MultiHeadAttention processes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Transformer_Block</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># print(input.shape)</span>
+    <span class="n">add4</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="n">attention1</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">key_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span><span class="n">add4</span><span class="p">,</span> <span class="n">add4</span><span class="p">)</span>
+    <span class="n">att_add1</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">attention1</span><span class="p">,</span> <span class="n">add4</span><span class="p">])</span>
+    <span class="n">att_add1</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="n">att_add1</span><span class="p">)</span>
+    <span class="n">mlp1</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">att_add1</span><span class="p">,</span> <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">att_add1</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">mlp1</span><span class="p">,</span> <span class="n">att_add1</span><span class="p">])</span>
+
+    <span class="n">att_add2</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="n">att_add1</span><span class="p">)</span>
+    <span class="n">attention2</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">key_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span><span class="n">att_add2</span><span class="p">,</span> <span class="n">att_add2</span><span class="p">)</span>
+    <span class="n">att_add2</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">attention2</span><span class="p">,</span> <span class="n">att_add2</span><span class="p">])</span>
+    <span class="n">att_add2</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="n">att_add2</span><span class="p">)</span>
+    <span class="n">mlp2</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">att_add2</span><span class="p">,</span> <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">att_add2</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">mlp2</span><span class="p">,</span> <span class="n">att_add2</span><span class="p">])</span>
+
+    <span class="n">att_add3</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="n">att_add2</span><span class="p">)</span>
+    <span class="n">attention3</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">key_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span><span class="n">att_add3</span><span class="p">,</span> <span class="n">att_add3</span><span class="p">)</span>
+    <span class="n">att_add3</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">attention3</span><span class="p">,</span> <span class="n">att_add3</span><span class="p">])</span>
+    <span class="n">att_add3</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="n">att_add3</span><span class="p">)</span>
+    <span class="n">mlp3</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">att_add3</span><span class="p">,</span> <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">att_add3</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">mlp3</span><span class="p">,</span> <span class="n">att_add3</span><span class="p">])</span>
+    <span class="n">attention</span> <span class="o">=</span> <span class="n">GroupNormalization</span><span class="p">()(</span><span class="n">att_add3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">attention</span>
+</pre></div>
+</div>
+<p><strong>Reduction Block</strong></p>
+<p>The Reduction Block is used to reduce the feature map size in three different ways and then concatenate them.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reduction_block</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+    <span class="c1"># 1</span>
+    <span class="n">conv1_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm1_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_1</span><span class="p">)</span>
+    <span class="n">acti1_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_1</span><span class="p">)</span>
+
+    <span class="n">conv1_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_1</span><span class="p">)</span>
+    <span class="n">norm1_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_2</span><span class="p">)</span>
+    <span class="n">acti1_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_2</span><span class="p">)</span>
+
+    <span class="n">conv1_3</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_2</span><span class="p">)</span>
+    <span class="n">norm1_3</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_3</span><span class="p">)</span>
+    <span class="n">acti1_3</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_3</span><span class="p">)</span>
+
+    <span class="n">conv1_4</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_3</span><span class="p">)</span>
+    <span class="n">norm1_4</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_4</span><span class="p">)</span>
+    <span class="n">acti1_4</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_4</span><span class="p">)</span>
+
+    <span class="c1"># 2</span>
+    <span class="n">maxpool2</span> <span class="o">=</span> <span class="n">MaxPooling3D</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">conv2_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">maxpool2</span><span class="p">)</span>
+    <span class="n">norm2_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_1</span><span class="p">)</span>
+    <span class="n">acti2_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_1</span><span class="p">)</span>
+
+    <span class="c1"># 3</span>
+    <span class="n">conv3_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm3_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_1</span><span class="p">)</span>
+    <span class="n">acti3_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_1</span><span class="p">)</span>
+
+    <span class="n">conv3_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti3_1</span><span class="p">)</span>
+    <span class="n">norm3_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_2</span><span class="p">)</span>
+    <span class="n">acti3_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_2</span><span class="p">)</span>
+
+    <span class="n">concat</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()([</span><span class="n">acti1_4</span><span class="p">,</span> <span class="n">acti2_1</span><span class="p">,</span> <span class="n">acti3_2</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">concat</span>
+</pre></div>
+</div>
+<p><strong>Deep Block</strong></p>
+<p>Same with the MultiView block, the Deep block uses the 3D convolution with different kernel size to extract the features along different axis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deep_block</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+    <span class="c1"># 1</span>
+    <span class="n">conv1_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm1_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_1</span><span class="p">)</span>
+    <span class="n">acti1_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_1</span><span class="p">)</span>
+
+    <span class="n">conv1_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_1</span><span class="p">)</span>
+    <span class="n">norm1_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_2</span><span class="p">)</span>
+    <span class="n">acti1_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_2</span><span class="p">)</span>
+
+    <span class="n">conv1_3</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_2</span><span class="p">)</span>
+    <span class="n">norm1_3</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_3</span><span class="p">)</span>
+    <span class="n">acti1_3</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_3</span><span class="p">)</span>
+
+    <span class="n">conv1_4</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti1_3</span><span class="p">)</span>
+    <span class="n">norm1_4</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv1_4</span><span class="p">)</span>
+    <span class="n">acti1_4</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm1_4</span><span class="p">)</span>
+
+    <span class="c1"># 2</span>
+    <span class="n">conv2_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm2_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_1</span><span class="p">)</span>
+    <span class="n">acti2_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_1</span><span class="p">)</span>
+
+    <span class="n">conv2_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti2_1</span><span class="p">)</span>
+    <span class="n">norm2_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_2</span><span class="p">)</span>
+    <span class="n">acti2_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_2</span><span class="p">)</span>
+
+    <span class="n">conv2_3</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti2_1</span><span class="p">)</span>
+    <span class="n">norm2_3</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_3</span><span class="p">)</span>
+    <span class="n">acti2_3</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_3</span><span class="p">)</span>
+
+    <span class="n">conv2_4</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti2_1</span><span class="p">)</span>
+    <span class="n">norm2_4</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv2_4</span><span class="p">)</span>
+    <span class="n">acti2_4</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm2_4</span><span class="p">)</span>
+
+    <span class="c1"># 3</span>
+    <span class="n">conv3_1</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">norm3_1</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_1</span><span class="p">)</span>
+    <span class="n">acti3_1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_1</span><span class="p">)</span>
+
+    <span class="n">conv3_2</span> <span class="o">=</span> <span class="n">Conv3D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                     <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">)(</span><span class="n">acti3_1</span><span class="p">)</span>
+    <span class="n">norm3_2</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">conv3_2</span><span class="p">)</span>
+    <span class="n">acti3_2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">norm3_2</span><span class="p">)</span>
+
+    <span class="n">concat</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()([</span><span class="n">acti1_4</span><span class="p">,</span> <span class="n">acti2_2</span><span class="p">,</span> <span class="n">acti2_3</span><span class="p">,</span> <span class="n">acti2_4</span><span class="p">,</span> <span class="n">acti3_2</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">concat</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Train" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="loss.html" class="btn btn-neutral float-right" title="Loss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Fengming Lin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+Installation
+============
+
+Welcome to the VASeg documentation!
+
+Installation
