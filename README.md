@@ -26,7 +26,7 @@ Folder structure:
 
     vessel-aneurysm-segmentation/
     ├── data
-    │   └── step0 (**put the data you want to do inference here**)
+    │   └── step0 (put the data you want to do inference here)
     │   │   └── ANSYS_UNIGE_09_image.nii.gz
     │   │   ├── ANSYS_UNIGE_28_image.nii.gz
     │   │   └── ...
@@ -35,7 +35,7 @@ Folder structure:
     │   │   ├── ANSYS_UNIGE_28_image.nii.gz
     │   │   └── ...
     ├── inference
-    │   └── inference.ipynb (**use this to do inference**)
+    │   └── inference.ipynb (use this to do inference)
     │   ├── inference.py
     ├── results
     │   └── aneurysm (aneurysm prediction)
