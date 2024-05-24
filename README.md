@@ -14,11 +14,9 @@ Cerebrovascular and Aneurysm Segmentation in 3DRA images via a Deep Multi-Task N
 
 Weights can be download here: 
 
-✨️ <a href="https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9aFDAVvmYezxWJROi/view?usp=sharing" target="_parent\"><img src="https://img.shields.io/badge/Download-Weight-blue" /></a>
+<a href="https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9aFDAVvmYezxWJROi/view?usp=sharing" target="_parent\"><img src="https://img.shields.io/badge/Download-Weight-blue" /></a> fmnet5.hdf5 for inference_AneuristNet.py 
 
-fmnet5.hdf5 for inference_AneuristNet.py https://drive.google.com/file/d/1XZZY_H-Nt6mOZ3E9aFDAVvmYezxWJROi/view?usp=sharing
-
-fmnet84.hdf5 for inference_Transformer.py https://drive.google.com/file/d/1bIBnfGVuFZY_Ggye_vSUF41bdUfeR-tC/view?usp=sharing
+<a href="https://drive.google.com/file/d/1bIBnfGVuFZY_Ggye_vSUF41bdUfeR-tC/view?usp=sharing" target="_parent\"><img src="https://img.shields.io/badge/Download-Weight-blue" /></a> fmnet84.hdf5 for inference_Transformer.py 
 
 
 Folder structure:
