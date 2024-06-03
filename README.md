@@ -1,7 +1,7 @@
 
 <br />
 
-##   This code has 2 versions:  
+#   This code has 2 versions:  
 
 👨‍💻 github version: fast inference mode, if you want to compare this methods with your owns, this is the most fast way to get the results.
 
