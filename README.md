@@ -1,6 +1,17 @@
 
 <br />
 
+#   This code has 2 versions:  
+
+
+
+
+##   📖 <a href="https://fmlinks.github.io/vessel-aneurysm-segmentation/docs/index.html" target="_parent\"><img src="https://img.shields.io/badge/Read-Document-blue" alt="Open In Colab"/></a>   🦒 <a href="https://colab.research.google.com/drive/1WS-u1ubEQaW7cGQ1R9IgW5Haytfduo1a?usp=sharing" target="_parent\"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  🗂️ <a href="https://drive.google.com/drive/folders/10owYD1CuLUzUn_uQNt6koc7JMdeRBKQk?usp=sharing" target="_parent\"><img src="https://img.shields.io/badge/Download-Project-blue" alt="Open In Colab"/></a> 🕹️ <a href="https://drive.google.com/drive/folders/1tO_c9qi9-ckH_9krY_Fyihz4g5B5va8S?usp=drive_link" target="_parent\"><img src="https://img.shields.io/badge/Download-Dataset (requires authority)-blue" alt="Open In Colab"/></a> 
+🦒 Colab version (**Recommend**): training mode!
+
+👨‍💻 GitHub version: fast inference mode, but need to set up the environment.
+
+❤ Docker version: (**Recommend**) inference mode!
 
 #   News! Docker version released!
 
@@ -27,15 +38,6 @@ Usage of this docker:
     
 4/ Please check the results in your output folder, should have aneurysm and vessel subfolders and the results are there.
 
-
-#   This code has 2 versions:  
-
-
-🦒 Colab version (**Recommend**): inference and training mode!
-
-👨‍💻 GitHub version: fast inference mode, but need to set up the environment.
-
-##   📖 <a href="https://fmlinks.github.io/vessel-aneurysm-segmentation/docs/index.html" target="_parent\"><img src="https://img.shields.io/badge/Read-Document-blue" alt="Open In Colab"/></a>   🦒 <a href="https://colab.research.google.com/drive/1WS-u1ubEQaW7cGQ1R9IgW5Haytfduo1a?usp=sharing" target="_parent\"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  🗂️ <a href="https://drive.google.com/drive/folders/10owYD1CuLUzUn_uQNt6koc7JMdeRBKQk?usp=sharing" target="_parent\"><img src="https://img.shields.io/badge/Download-Project-blue" alt="Open In Colab"/></a> 🕹️ <a href="https://drive.google.com/drive/folders/1tO_c9qi9-ckH_9krY_Fyihz4g5B5va8S?usp=drive_link" target="_parent\"><img src="https://img.shields.io/badge/Download-Dataset (requires authority)-blue" alt="Open In Colab"/></a> 
 
 
 
