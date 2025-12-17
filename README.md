@@ -1,8 +1,34 @@
 
 <br />
 
-#   This code has 2 versions:  
 
+#   News! Docker version released!
+
+We have released the brain vessel and aneurysm segmentation Docker image: lfm840731775/vaseg:unet.gpu.3.0
+​
+Usage of this docker:
+
+1/ Creat your input and output folder
+
+    Put your 3DRA nifti image into local folder, for example "C:\lfm\code\pytorch\VASeg_torch\data\input", 
+    Create your output folder for example "C:\lfm\code\pytorch\VASeg_torch\data\output"
+    Data location: https://github.com/fmlinks/vessel-aneurysm-segmentation/tree/master/data/step1
+
+2/ Pull the docker image
+    
+    docker pull lfm840731775/vaseg:unet.gpu.3.0
+    
+3/ Run inference (GPU required)
+
+    docker run --rm --gpus all -v "[your input folder (containing the NIfTI files)]:/input" -v "[your output folder (vessel + aneurysm segmentations will be saved)]:/output" lfm840731775/vaseg:unet.gpu.3.0
+    
+    Example (Windows)
+    docker run --rm --gpus all -v "C:\lfm\code\pytorch\VASeg_torch\data\input:/input" -v "C:\lfm\code\pytorch\VASeg_torch\data\output:/output" lfm840731775/vaseg:unet.gpu.3.0
+    
+4/ Please check the results in your output folder, should have aneurysm and vessel subfolders and the results are there.
+
+
+#   This code has 2 versions:  
 
 
 🦒 Colab version (**Recommend**): inference and training mode!
