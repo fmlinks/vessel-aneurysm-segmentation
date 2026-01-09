@@ -92,6 +92,11 @@ How to use the code:
     cd inference
     python inference_AneuristNet.py
 
+Issue:
+
+    if your preprocessing is very time-consuming, dont forget to resize your input images to 0.35mm/pixel resolution.
+    the cropped patch for every images should be around 512 or less.
+
 
 Citation  ヾ(o′▽`o)ノ°°
 
