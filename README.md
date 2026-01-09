@@ -94,8 +94,9 @@ How to use the code:
 
 Issue:
 
-    if your preprocessing is very time-consuming, dont forget to resize your input images to 0.35mm/pixel resolution.
-    the number of cropped patches for every image should be around 512 or less.
+1/ preprocessing is time-consuming.
+
+    if your preprocessing is very time-consuming, dont forget to resize your input images to 0.35mm/pixel resolution. The number of cropped patches for every image should be around 512 or less.
 
 
 Citation  ヾ(o′▽`o)ノ°°
